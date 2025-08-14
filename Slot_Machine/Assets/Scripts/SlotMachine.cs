@@ -24,7 +24,7 @@ public class SlotMachine : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();//getting the sprite renderer component
         spriteRenderer.sprite = normalSprite;
-        totalPrizeValue = 10;
+        totalPrizeValue = 30;
         UpdateTotalPrizeValue();
     }
 
