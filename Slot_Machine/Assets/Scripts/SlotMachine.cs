@@ -16,12 +16,15 @@ public class SlotMachine : MonoBehaviour
     public Sprite normalSprite;//access to normal sprite
     public Sprite downSprite;//access to down sprite
     private SpriteRenderer spriteRenderer;//sprite renderer for the handle
+    public BettingUI bettingUI;// Reference to the BettingUI script
+    private bool isFirstSpin = true;//boolean to check if first spin is done
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();//getting the sprite renderer component
         spriteRenderer.sprite = normalSprite;
-        totalPrizeValue = 0;
+        totalPrizeValue = 10;
         UpdateTotalPrizeValue();
     }
 
@@ -43,6 +46,10 @@ public class SlotMachine : MonoBehaviour
             prizeText.enabled = true;
             prizeText.text = "PRIZE: " + prizeValue;
         }
+        if (!isFirstSpin && rows[0].rowStopped && rows[1].rowStopped && rows[2].rowStopped && resultsChecked)
+        {
+            bettingUI.OpenBettingPanel();
+        }
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             OnMouseDown();// Call OnMouseDown when the mouse button is pressed
@@ -53,6 +60,11 @@ public class SlotMachine : MonoBehaviour
         if (rows[0].rowStopped && rows[1].rowStopped && rows[2].rowStopped)
         {
             StartCoroutine(PullHandle());
+        }
+        if (isFirstSpin)
+        {
+            isFirstSpin = false;
+            bettingUI.MarkFirstSpinDone();
         }
     }
     private IEnumerator PullHandle()
@@ -115,5 +127,25 @@ public class SlotMachine : MonoBehaviour
         {
             totalPrizeText.text = "TOTAL: " + totalPrizeValue;
         }
+    }
+    public int GetTotalPrizeValue()//get the total prize value
+    {
+        return totalPrizeValue;
+    }
+    public void AdjustTotalPrize(int amount)//adjust the total prize value
+    {
+        totalPrizeValue += amount;
+        UpdateTotalPrizeValue();
+    }
+    public void StartSpinFromBet()//Start spinning the reels from the betting UI
+    {
+        if (rows[0].rowStopped && rows[1].rowStopped && rows[2].rowStopped)
+        {
+            StartCoroutine(PullHandle());
+        }
+    }
+    public void DisableSlotMachine()
+    {
+        this.enabled = false; // stops its Update and other methods
     }
 }

@@ -79,7 +79,7 @@ public class Row : MonoBehaviour
         Vector2 pos = transform.position;
 
         // Move down one step
-        pos.y -= 1f;
+        pos.y += 1f;
 
         // Wrap from below the lowest position back to the top
         if (pos.y <= 2f)
@@ -88,7 +88,7 @@ public class Row : MonoBehaviour
         }
 
         // Wrap from above the highest position back to the bottom
-        if (pos.y > 9f)
+        if (pos.y >= 9f)
         {
             pos.y = 2f;
         }
