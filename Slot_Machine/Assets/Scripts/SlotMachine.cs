@@ -8,8 +8,10 @@ public class SlotMachine : MonoBehaviour
 {
     public static event Action HandlePulled = delegate { };//stating that a global event has been created and calling out other scripts
     public TextMeshProUGUI prizeText;//text component to display the prize
+    public TextMeshProUGUI totalPrizeText;//text component to display the total prize
     public Row[] rows;//array of rows to hold the symbols
     private int prizeValue;//value of the current prize
+    private int totalPrizeValue; // Running total prize
     private bool resultsChecked = false;//boolean to check if results have been checked
     public Sprite normalSprite;//access to normal sprite
     public Sprite downSprite;//access to down sprite
@@ -19,7 +21,9 @@ public class SlotMachine : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();//getting the sprite renderer component
         spriteRenderer.sprite = normalSprite;
-     }
+        totalPrizeValue = 0;
+        UpdateTotalPrizeValue();
+    }
 
     // Update is called once per frame
     void Update()
@@ -34,6 +38,8 @@ public class SlotMachine : MonoBehaviour
         if (rows[0].rowStopped && rows[1].rowStopped && rows[2].rowStopped && !resultsChecked)
         {   //once all the rows stops and if the result is not checked then check the result
             CheckResults();
+            totalPrizeValue += prizeValue; // Add current prize to total
+            UpdateTotalPrizeValue();          // Refresh UI
             prizeText.enabled = true;
             prizeText.text = "PRIZE: " + prizeValue;
         }
@@ -79,7 +85,7 @@ public class SlotMachine : MonoBehaviour
         string slot1 = rows[0].stoppedSlot;//creating a slot to check for the necessary conditions
         string slot2 = rows[1].stoppedSlot;
         string slot3 = rows[2].stoppedSlot;
-
+        prizeValue = 0; //Reset before calculating
         //check for 3 matches
         if (slot1 == slot2 && slot2 == slot3)
         {
@@ -102,5 +108,12 @@ public class SlotMachine : MonoBehaviour
             }
         }
         resultsChecked = true;
+    }
+    private void UpdateTotalPrizeValue()//Update the total winnings text
+    {
+        if (totalPrizeText != null)
+        {
+            totalPrizeText.text = "TOTAL: " + totalPrizeValue;
+        }
     }
 }
