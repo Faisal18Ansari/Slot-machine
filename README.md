@@ -24,7 +24,8 @@ Different symbols have different payout values (Seven pays the most, naturally)
 
 Super simple - no downloads or installations needed!
 Just head over to my itch.io page and play it directly in your browser:
-🎮 Play SPIN & WIN on itch.io
+[🎮 Play SPIN & WIN on itch.io](https://faisal-mujahid.itch.io/spinandwin-unity-slot-machine-game)
+
 Click the link, wait for it to load, and you're ready to spin! Works on any modern browser - Chrome, Firefox, Safari, you name it.
 
 **⭐ Bonus Features**
