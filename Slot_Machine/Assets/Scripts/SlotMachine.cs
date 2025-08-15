@@ -200,4 +200,21 @@ public class SlotMachine : MonoBehaviour
             audioSource.PlayOneShot(winClip);
         }
     }
+
+    // Reset Slot Machine
+    public void ResetSlotMachine()
+    {
+        totalPrizeValue = 30;
+        prizeValue = 0;
+        UpdateTotalPrizeValue();
+        isFirstSpin = true;
+        resultsChecked = false;
+        prizeText.enabled = false;
+
+        foreach (Row row in rows)
+    {
+        row.ResetRow();
+    }
+        
+    }
 }

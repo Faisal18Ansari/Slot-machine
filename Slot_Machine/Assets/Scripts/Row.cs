@@ -104,4 +104,12 @@ public class Row : MonoBehaviour
     {
         SlotMachine.HandlePulled -= StartRotating;
     }
+    public void ResetRow()
+    {
+        // Resetting the position to the starting point
+        transform.position = new Vector2(transform.position.x, 7f);
+
+        stoppedSlot = "";
+        rowStopped = true;
+    }
 }
