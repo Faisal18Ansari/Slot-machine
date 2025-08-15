@@ -5,23 +5,23 @@ public class Row : MonoBehaviour
 {
     private int randomValue;//decides how long a particular row will spin
     private float timeInterval;//used to slow the movement of the row down during the spinning
-    public string stoppedSlot;
-    public bool rowStopped;
+    public string stoppedSlot;//String representing the symbol where the row stopped
+    public bool rowStopped;//Boolean to check if the row has stopped spinning
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rowStopped = true;
-        SlotMachine.HandlePulled += StartRotating;
+        SlotMachine.HandlePulled += StartRotating;// Subscribe to the HandlePulled event
     }
     private void StartRotating()
     {
         stoppedSlot = "";
-        StartCoroutine("Rotate");
+        StartCoroutine("Rotate");// Start the rotation coroutine
     }
     private IEnumerator Rotate()
     {
         rowStopped = false;
-        timeInterval = 0.025f;
+        timeInterval = 0.025f;// Initial time interval for spinning
         for (int i = 0; i < 8; i++)// one full pass across all 8 positions (2..9)
         {
             StepDownOneCell();
@@ -38,7 +38,8 @@ public class Row : MonoBehaviour
             if (i > Mathf.RoundToInt(randomSteps * 0.92f)) timeInterval = 0.20f;
 
             yield return new WaitForSeconds(timeInterval);//smooth operation
-        }
+        }   
+        // check all the positions for symbols recognition
         if (transform.position.y == 2f)
         {
             stoppedSlot = "Seven";
@@ -102,7 +103,7 @@ public class Row : MonoBehaviour
     }
     private void OnDestroy()
     {
-        SlotMachine.HandlePulled -= StartRotating;
+        SlotMachine.HandlePulled -= StartRotating;// Unsubscribe from the HandlePulled event
     }
     public void ResetRow()
     {

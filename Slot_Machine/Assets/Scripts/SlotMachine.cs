@@ -84,12 +84,12 @@ public class SlotMachine : MonoBehaviour
         }
         if (rows[0].rowStopped && rows[1].rowStopped && rows[2].rowStopped)
         {
-            StartCoroutine(PullHandle());
+            StartCoroutine(PullHandle());// Start pulling the handle if all rows are stopped
         }
         if (isFirstSpin)
         {
-            isFirstSpin = false;
-            bettingUI.MarkFirstSpinDone();
+            isFirstSpin = false;// Mark the first spin as done
+            bettingUI.MarkFirstSpinDone();// Notify betting UI that first spin is done
         }
     }
     private IEnumerator PullHandle()
@@ -193,6 +193,7 @@ public class SlotMachine : MonoBehaviour
         resultsChecked = true;
     }
 
+    // Play win sound effect
     private void PlayWinSound()
     {
         if (audioSource != null && winClip != null)
@@ -213,7 +214,7 @@ public class SlotMachine : MonoBehaviour
 
         foreach (Row row in rows)
     {
-        row.ResetRow();
+        row.ResetRow();// Reset each row
     }
         
     }

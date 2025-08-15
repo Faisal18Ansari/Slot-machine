@@ -2,11 +2,13 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
+    [Header("References")]
     public GameObject pauseMenuUI; // Reference to the pause menu UI
-    private bool isPaused = false; // Boolean to track pause state
     public SlotMachine slotMachine; // Reference to the slot machine script
     public BettingUI bettingUI; // Reference to the betting UI script
     private AudioManager audioManager; // Reference to the AudioManager script
+
+    private bool isPaused = false; // Boolean to track pause state
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -50,9 +52,9 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.GetComponent<CanvasGroup>().blocksRaycasts = true; //block clicks when menu is active
         Time.timeScale = 0f; // Stop game time
         isPaused = true; // Update pause state
-        GetComponent<AudioSource>().Pause();
-        slotMachine.enabled = false;
-        bettingUI.enabled = false;
+        GetComponent<AudioSource>().Pause();// Pause background music
+        slotMachine.enabled = false;// Disable slot machine script
+        bettingUI.enabled = false;// Disable betting UI script
         if (audioManager != null)
             audioManager.PauseMusic(); // Pause music
     }

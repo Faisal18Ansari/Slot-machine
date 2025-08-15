@@ -3,17 +3,25 @@ using UnityEngine.UI;
 using TMPro;
 public class BettingUI : MonoBehaviour
 {
+    [Header("References GameObjects")]
     public SlotMachine slotMachine;// Reference to the SlotMachine script
     public GameObject bettingPanel;// Reference to the betting panel UI
     public GameObject slotMachineGameObject;// Reference to the slot machine GameObject
-    public TextMeshProUGUI messageText;// Reference to the message text UI
-    public TextMeshProUGUI totalPrizeText;//text component to display the total prize
+
+    [Header("References Buttons")]
     public Button bet10;// Reference to the 10 bet button
     public Button bet50;// Reference to the 50 bet button
     public Button bet100;// Reference to the 100 bet button
     public Button exit;// Reference to the exit button
     public Button retryButton; // Reference to Retry button
+
+    [Header("References Audio")]
     public AudioSource backgroundMusic; // Reference to the background music AudioSource
+
+    [Header("References Text")]
+    public TextMeshProUGUI messageText;// Reference to the message text UI
+    public TextMeshProUGUI totalPrizeText;//text component to display the total prize
+
     private bool firstSpinDone = false;//boolean to check if first spin is done or not
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    private AudioSource audioSource;
+    private AudioSource audioSource;// Reference to the AudioSource component
 
     void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();// Reference to the AudioSource component
 
-        // Make sure it doesn't get destroyed on scene load
+        // Making sure it doesn't get destroyed on scene load
         DontDestroyOnLoad(gameObject);
     }
 
