@@ -82,7 +82,11 @@ Code Organization: Used Unity's event system for clean communication between scr
 **🎯 Technical Highlights**
 
 Clean script communication via event driven architecture
+
 Way of animating the smooth reel spinning with coroutines
+
 use of state management to manage a complex flow of game
+
 Integration of the audio system to include good pause/ resume capability
+
 Intuitive, responsive UI/UX design Contributing to the development of the UI/UX design, the interactive and clear user interface will support the accessibility of the product.
