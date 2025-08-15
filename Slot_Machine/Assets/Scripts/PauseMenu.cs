@@ -6,6 +6,7 @@ public class PauseMenu : MonoBehaviour
     private bool isPaused = false; // Boolean to track pause state
     public SlotMachine slotMachine; // Reference to the slot machine script
     public BettingUI bettingUI; // Reference to the betting UI script
+    private AudioManager audioManager; // Reference to the AudioManager script
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -13,6 +14,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(false); // Hide pause menu at start
         Time.timeScale = 1f; // Ensure game is running at normal speed
         pauseMenuUI.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        audioManager = FindFirstObjectByType<AudioManager>();
     }
 
     // Update is called once per frame
@@ -37,9 +39,10 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.GetComponent<CanvasGroup>().blocksRaycasts = false; // stop blocking raycasts when hidden
         Time.timeScale = 1f; // Resume game time
         isPaused = false; // Update pause state
-
         slotMachine.enabled = true;
         bettingUI.enabled = true;
+        if (audioManager != null)
+            audioManager.ResumeMusic(); // Resume music
     }
     public void PauseGame()
     {
@@ -47,9 +50,11 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.GetComponent<CanvasGroup>().blocksRaycasts = true; //block clicks when menu is active
         Time.timeScale = 0f; // Stop game time
         isPaused = true; // Update pause state
-
+        GetComponent<AudioSource>().Pause();
         slotMachine.enabled = false;
         bettingUI.enabled = false;
+        if (audioManager != null)
+            audioManager.PauseMusic(); // Pause music
     }
     public void QuitGame()
     {

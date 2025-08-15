@@ -56,7 +56,7 @@ public class BettingUI : MonoBehaviour
         if (slotMachine.GetTotalPrizeValue() < amount)
         {
             // Show insufficient funds message and block spin
-            messageText.gameObject.SetActive(true);
+            messageText.gameObject.SetActive(true); 
             messageText.text = "Not enough funds! Bad luck!";
             bettingPanel.SetActive(false); // Hide betting panel
             slotMachineGameObject.SetActive(false);// Disable slot machine GameObject
